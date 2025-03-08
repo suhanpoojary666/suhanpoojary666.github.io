@@ -1,41 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday!</title>
-    <style>
-        body {
-            text-align: center;
-            background-color: #ffccff;
-            font-family: Arial, sans-serif;
-        }
-        .container {
-            margin-top: 100px;
-        }
-        h1 {
-            font-size: 50px;
-            color: #ff4081;
-            animation: bounce 1s infinite;
-        }
-        p {
-            font-size: 20px;
-            color: #333;
-        }
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        .cake {
-            font-size: 100px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday!</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+      color: #fff;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    h1 {
+      font-size: 4rem;
+      margin: 0;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+
+    .balloons {
+      position: relative;
+      margin-top: 20px;
+    }
+
+    .balloon {
+      width: 100px;
+      height: 120px;
+      background: #ff6f61;
+      border-radius: 50%;
+      position: absolute;
+      animation: float 6s infinite;
+    }
+
+    .balloon:nth-child(2) {
+      background: #6b5b95;
+      left: 120px;
+      animation-duration: 8s;
+    }
+
+    .balloon:nth-child(3) {
+      background: #88b04b;
+      left: -120px;
+      animation-duration: 7s;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-100px);
+      }
+      100% {
+        transform: translateY(0);
+      }
+    }
+
+    .message {
+      font-size: 1.5rem;
+      margin-top: 30px;
+      animation: fadeIn 3s ease-in;
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 1.2rem;
+      background: #ff6f61;
+      border: none;
+      color: #fff;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #ff3b2f;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: #ffdd57;
+      animation: confetti-fall 5s linear infinite;
+    }
+
+    @keyframes confetti-fall {
+      0% {
+        transform: translateY(-100vh) rotate(0deg);
+      }
+      100% {
+        transform: translateY(100vh) rotate(720deg);
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>🎉 Happy Birthday Suhan! 🎂</h1>
-        <p>Wishing you a day filled with joy, laughter, and lots of cake! 🎁🎈</p>
-        <div class="cake">🎂</div>
+  <div class="container">
+    <h1>🎉 Happy Birthday! 🎉</h1>
+    <div class="balloons">
+      <div class="balloon"></div>
+      <div class="balloon"></div>
+      <div class="balloon"></div>
     </div>
+    <p class="message">Wishing you a day filled with love, laughter, and lots of cake! 🎂</p>
+    <button onclick="showSurprise()">Click for a Surprise!</button>
+    <p id="surprise" class="hidden">🎁 You are amazing! Here's to another year of wonderful memories! 🎈</p>
+  </div>
+
+  <script>
+    function showSurprise() {
+      document.getElementById('surprise').classList.remove('hidden');
+      createConfetti();
+    }
+
+    function createConfetti() {
+      const confettiCount = 100;
+      const container = document.querySelector('.container');
+
+      for (let i = 0; i < confettiCount; i++) {
+        const confetti = document.createElement('div');
+        confetti.classList.add('confetti');
+        confetti.style.left = `${Math.random() * 100}vw`;
+        confetti.style.animationDuration = `${Math.random() * 3 + 2}s`;
+        confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 70%)`;
+        container.appendChild(confetti);
+      }
+    }
+  </script>
 </body>
 </html>
